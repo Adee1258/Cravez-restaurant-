@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cravez 3D Restaurant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #0D0D0D;
+            color: #F5F0E8;
+            overflow-x: hidden;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #0D0D0D 0%, #1a0a02 100%);
+            position: relative;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            color: #F5F0E8;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 span {
+            color: #E8541A;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: #888;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            background: #E8541A;
+            color: #fff;
+            border: none;
+            padding: 20px 60px;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 30px rgba(232,84,26,0.3);
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(232,84,26,0.45);
+        }
+        
+        .showcase {
+            padding: 80px 40px;
+            background: linear-gradient(180deg, #0D0D0D 0%, #1a0a02 50%, #0D0D0D 100%);
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .showcase-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .canvas-container {
+            height: 500px;
+            background: linear-gradient(to bottom, #1a1208, #0a0a0a);
+            border-radius: 8px;
+            border: 1px solid rgba(232,84,26,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .placeholder-3d {
+            text-align: center;
+            color: #888;
+        }
+        
+        .placeholder-3d h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #E8541A;
+        }
+        
+        .placeholder-3d p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-button {
+            background: transparent;
+            color: #E8541A;
+            border: 1px solid #E8541A;
+            padding: 12px 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .demo-button:hover {
+            background: #E8541A;
+            color: #fff;
+        }
+        
+        .info-section h2 {
+            font-size: 10px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #E8541A;
+            margin-bottom: 16px;
+        }
+        
+        .info-section .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 900;
+            color: #F5F0E8;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        
+        .info-section .main-title span {
+            color: #E8541A;
+        }
+        
+        .info-section p {
+            font-size: 15px;
+            color: #888;
+            line-height: 1.85;
+            margin-bottom: 30px;
+            max-width: 440px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+        
+        .stat-item div:first-child {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #E8541A;
+        }
+        
+        .stat-item div:last-child {
+            font-size: 10px;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        
+        .controls-hint {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.3);
+            font-size: 11px;
+            letter-spacing: 2;
+            text-transform: uppercase;
+        }
+        
+        @media (max-width: 900px) {
+            .showcase-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .stats {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>CR<span>A</span>VEZ</h1>
+            <p>SATISFY EVERY CRAVING™</p>
+            <button class="cta-button" onclick="document.querySelector('.showcase').scrollIntoView({behavior: 'smooth'})">
+                EXPLORE 3D MENU
+            </button>
+        </div>
+    </div>
+    
+    <div class="showcase">
+        <div class="showcase-content">
+            <div class="canvas-container">
+                <div class="placeholder-3d">
+                    <h3>3D Biryani Showcase</h3>
+                    <p>Interactive 3D food visualization</p>
+                    <button class="demo-button" onclick="alert('Full 3D viewer requires React setup. This is a demo placeholder.')">
+                        View 3D Model
+                    </button>
+                </div>
+                <div class="controls-hint">
+                    <span>🖖</span> Drag to rotate · Scroll to zoom
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2>3D Experience</h2>
+                <div class="main-title">
+                    Our Signature<br />
+                    <span>Chicken Biryani</span>
+                </div>
+                <p>
+                    Experience our most loved dish in immersive 3D. Slow-cooked chicken layered 
+                    with fragrant basmati rice, saffron, and traditional spices. Every grain 
+                    tells a story of authentic desi flavors.
+                </p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div>300</div>
+                        <div>Rs. Starting</div>
+                    </div>
+                    <div class="stat-item">
+                        <div>2hrs</div>
+                        <div>Slow Cooked</div>
+                    </div>
+                    <div class="stat-item">
+                        <div>15+</div>
+                        <div>Spices</div>
+                    </div>
+                </div>
+                
+                <button class="cta-button" onclick="alert('Full 3D viewer requires React setup. This is a demo placeholder.')">
+                    Open Full 3D Viewer
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
