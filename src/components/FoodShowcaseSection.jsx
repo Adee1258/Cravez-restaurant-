@@ -472,8 +472,10 @@ export default function FoodShowcaseSection({ id, category, imagePath, title, de
           </h3>
           <div className="food-card-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '24px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '20px',
+            maxWidth: '1200px',
+            margin: '0 auto'
           }}>
             {filteredMenu.map((item, index) => (
               <FoodCard 
