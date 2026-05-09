@@ -105,30 +105,7 @@ export default function FoodCard({ item, index, onAdd, onView3D }) {
           background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)',
           pointerEvents: 'none',
         }} />
-        {onView3D && (
-          <div style={{
-            position: 'absolute',
-            bottom: 12,
-            left: '50%',
-            transform: hovered ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(10px)',
-            opacity: hovered ? 1 : 0,
-            transition: 'all 0.3s ease',
-            background: 'rgba(232,84,26,0.95)',
-            color: '#fff',
-            fontSize: 10,
-            letterSpacing: 2,
-            padding: '6px 16px',
-            textTransform: 'uppercase',
-            fontFamily: "'DM Sans',sans-serif",
-            fontWeight: 500,
-            borderRadius: 0,
-            pointerEvents: 'none',
-            whiteSpace: 'nowrap',
-          }}>
-            Click for 3D View
-          </div>
-        )}
-      </div>
+              </div>
 
       {/* Body */}
       <div style={{ 
