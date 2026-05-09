@@ -15,7 +15,7 @@ export default function AdminPanel({ onAddFood, onUpdateFood, onDeleteFood, menu
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginUser, setLoginUser] = useState('');
   const [loginPass, setLoginPass] = useState('');
-  const [activeTab, setActiveTab] = useState('add-food'); // 'add-food', 'edit-menu', 'profile'
+  const [activeTab, setActiveTab] = useState('add-food'); // 'add-food', 'edit-menu', 'profile', 'privacy', 'analytics', 'settings'
   
   const [editingItem, setEditingItem] = useState(null);
   const fileInputRef = useRef(null);
@@ -282,6 +282,24 @@ export default function AdminPanel({ onAddFood, onUpdateFood, onDeleteFood, menu
         active={activeTab === 'profile'} 
         onClick={() => setActiveTab('profile')} 
       />
+      <SidebarItem 
+        label="Privacy Policy" 
+        icon="🔒" 
+        active={activeTab === 'privacy'} 
+        onClick={() => setActiveTab('privacy')} 
+      />
+      <SidebarItem 
+        label="Analytics" 
+        icon="📊" 
+        active={activeTab === 'analytics'} 
+        onClick={() => setActiveTab('analytics')} 
+      />
+      <SidebarItem 
+        label="Settings" 
+        icon="⚙️" 
+        active={activeTab === 'settings'} 
+        onClick={() => setActiveTab('settings')} 
+      />
 
       <div style={{ marginTop: 'auto', padding: '15px' }}>
         <button 
@@ -538,6 +556,191 @@ export default function AdminPanel({ onAddFood, onUpdateFood, onDeleteFood, menu
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'privacy' && (
+          <div style={{ maxWidth: '800px' }}>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '42px', marginBottom: '40px' }}>Privacy Policy</h1>
+            <p style={{ color: '#666', marginBottom: '30px', lineHeight: '1.6' }}>
+              At Cravez Restaurant, we take your privacy seriously. This policy outlines how we collect, use, and protect your information when you use our ordering system and website.
+            </p>
+            
+            <div style={{ background: '#231a12', padding: '30px', borderRadius: '16px', marginBottom: '30px' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>Information We Collect</h2>
+              <ul style={{ color: '#fff', paddingLeft: '20px', lineHeight: '1.8' }}>
+                <li style={{ marginBottom: '12px' }}>Personal Information: Name, email, phone number for order delivery</li>
+                <li style={{ marginBottom: '12px' }}>Order History: Previous orders and preferences</li>
+                <li style={{ marginBottom: '12px' }}>Payment Information: Secure payment processing details</li>
+                <li style={{ marginBottom: '12px' }}>Location Data: Delivery address and location services</li>
+                <li style={{ marginBottom: '12px' }}>Usage Analytics: How you interact with our menu and features</li>
+              </ul>
+            </div>
+
+            <div style={{ background: '#231a12', padding: '30px', borderRadius: '16px', marginBottom: '30px' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>How We Use Your Information</h2>
+              <ul style={{ color: '#fff', paddingLeft: '20px', lineHeight: '1.8' }}>
+                <li style={{ marginBottom: '12px' }}>Order Processing: To process and deliver your food orders</li>
+                <li style={{ marginBottom: '12px' }}>Customer Support: To respond to your inquiries and issues</li>
+                <li style={{ marginBottom: '12px' }}>Service Improvement: To enhance our menu and delivery experience</li>
+                <li style={{ marginBottom: '12px' }}>Marketing: To inform about special offers and new menu items</li>
+                <li style={{ marginBottom: '12px' }}>Legal Compliance: To meet food service regulations</li>
+              </ul>
+            </div>
+
+            <div style={{ background: '#231a12', padding: '30px', borderRadius: '16px', marginBottom: '30px' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>Data Protection</h2>
+              <ul style={{ color: '#fff', paddingLeft: '20px', lineHeight: '1.8' }}>
+                <li style={{ marginBottom: '12px' }}>🔒 Secure encryption for all payment transactions</li>
+                <li style={{ marginBottom: '12px' }}>🛡️ Limited access to authorized personnel only</li>
+                <li style={{ marginBottom: '12px' }}>📊 Regular security audits and updates</li>
+                <li style={{ marginBottom: '12px' }}>⏰ Data retention limits - we don't keep data forever</li>
+                <li style={{ marginBottom: '12px' }}>🚫 No sharing with third parties without consent</li>
+              </ul>
+            </div>
+
+            <div style={{ background: '#231a12', padding: '30px', borderRadius: '16px', marginBottom: '30px' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>Your Rights</h2>
+              <ul style={{ color: '#fff', paddingLeft: '20px', lineHeight: '1.8' }}>
+                <li style={{ marginBottom: '12px' }}>👁 Access: View and download your personal data</li>
+                <li style={{ marginBottom: '12px' }}>✏️ Correction: Update or correct your information</li>
+                <li style={{ marginBottom: '12px' }}>🗑️ Deletion: Request removal of your account and data</li>
+                <li style={{ marginBottom: '12px' }}>📧 Portability: Transfer data to other services</li>
+                <li style={{ marginBottom: '12px' }}>🚫 Opt-out: Choose what marketing you receive</li>
+              </ul>
+            </div>
+
+            <div style={{ background: 'rgba(232, 84, 26, 0.1)', padding: '30px', borderRadius: '16px', border: '1px solid rgba(232, 84, 26, 0.3)' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>Contact for Privacy Issues</h2>
+              <p style={{ color: '#fff', marginBottom: '15px' }}>
+                <strong>Email:</strong> privacy@cravez.com
+              </p>
+              <p style={{ color: '#fff', marginBottom: '15px' }}>
+                <strong>Phone:</strong> +92-51-XXXXXXX
+              </p>
+              <p style={{ color: '#fff' }}>
+                <strong>Store Address:</strong> I-10/2 Street 11 Hussain Market, Islamabad
+              </p>
+              <p style={{ color: '#E8541A', fontSize: '14px', marginTop: '20px' }}>
+                Last Updated: {new Date().toLocaleDateString()}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'analytics' && (
+          <div style={{ maxWidth: '800px' }}>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '42px', marginBottom: '40px' }}>Analytics Dashboard</h1>
+            <p style={{ color: '#666', marginBottom: '30px' }}>
+              Monitor your restaurant performance and customer insights.
+            </p>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '30px' }}>
+              <div style={{ background: '#231a12', padding: '25px', borderRadius: '16px', textAlign: 'center' }}>
+                <div style={{ fontSize: '36px', marginBottom: '10px' }}>📊</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#E8541A', marginBottom: '5px' }}>{menuItems.length}</div>
+                <div style={{ fontSize: '14px', color: '#666' }}>Total Menu Items</div>
+              </div>
+              
+              <div style={{ background: '#231a12', padding: '25px', borderRadius: '16px', textAlign: 'center' }}>
+                <div style={{ fontSize: '36px', marginBottom: '10px' }}>🍽</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#E8541A', marginBottom: '5px' }}>{categories.length - 1}</div>
+                <div style={{ fontSize: '14px', color: '#666' }}>Active Categories</div>
+              </div>
+              
+              <div style={{ background: '#231a12', padding: '25px', borderRadius: '16px', textAlign: 'center' }}>
+                <div style={{ fontSize: '36px', marginBottom: '10px' }}>⭐</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#E8541A', marginBottom: '5px' }}>{menuItems.filter(item => item.featured).length}</div>
+                <div style={{ fontSize: '14px', color: '#666' }}>Featured Items</div>
+              </div>
+              
+              <div style={{ background: '#231a12', padding: '25px', borderRadius: '16px', textAlign: 'center' }}>
+                <div style={{ fontSize: '36px', marginBottom: '10px' }}>📈</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#E8541A', marginBottom: '5px' }}>+24%</div>
+                <div style={{ fontSize: '14px', color: '#666' }}>Monthly Growth</div>
+              </div>
+            </div>
+
+            <div style={{ background: 'rgba(232, 84, 26, 0.1)', padding: '30px', borderRadius: '16px', border: '1px solid rgba(232, 84, 26, 0.3)' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>Recent Activity</h2>
+              <div style={{ color: '#fff', lineHeight: '1.6' }}>
+                <p style={{ marginBottom: '10px' }}>📝 <strong>Menu Updated:</strong> 5 new items added this week</p>
+                <p style={{ marginBottom: '10px' }}>🍽 <strong>Popular Items:</strong> Chicken Biryani, Aloo Paratha, Special Chai</p>
+                <p style={{ marginBottom: '10px' }}>⏰ <strong>Peak Hours:</strong> 12PM - 3PM, 7PM - 9PM</p>
+                <p>📱 <strong>Mobile Orders:</strong> 67% of total orders</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'settings' && (
+          <div style={{ maxWidth: '800px' }}>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '42px', marginBottom: '40px' }}>Settings</h1>
+            <p style={{ color: '#666', marginBottom: '30px' }}>
+              Configure your restaurant management system.
+            </p>
+            
+            <div style={{ background: '#231a12', padding: '30px', borderRadius: '16px', marginBottom: '30px' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>Restaurant Settings</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', color: '#E8541A' }}>Restaurant Name</label>
+                  <input type="text" defaultValue="Cravez" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #333', background: '#1a1a1a', color: '#fff' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', color: '#E8541A' }}>Delivery Radius (km)</label>
+                  <input type="number" defaultValue="5" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #333', background: '#1a1a1a', color: '#fff' }} />
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', color: '#E8541A' }}>Opening Time</label>
+                  <input type="time" defaultValue="08:00" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #333', background: '#1a1a1a', color: '#fff' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', color: '#E8541A' }}>Closing Time</label>
+                  <input type="time" defaultValue="23:00" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #333', background: '#1a1a1a', color: '#fff' }} />
+                </div>
+              </div>
+            </div>
+
+            <div style={{ background: '#231a12', padding: '30px', borderRadius: '16px', marginBottom: '30px' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>Order Settings</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', color: '#E8541A' }}>Minimum Order Amount</label>
+                  <input type="number" defaultValue="200" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #333', background: '#1a1a1a', color: '#fff' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', color: '#E8541A' }}>Delivery Fee</label>
+                  <input type="number" defaultValue="50" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #333', background: '#1a1a1a', color: '#fff' }} />
+                </div>
+              </div>
+            </div>
+
+            <div style={{ background: 'rgba(232, 84, 26, 0.1)', padding: '30px', borderRadius: '16px', border: '1px solid rgba(232, 84, 26, 0.3)' }}>
+              <h2 style={{ color: '#E8541A', fontSize: '20px', marginBottom: '20px' }}>System Settings</h2>
+              <div style={{ color: '#fff', lineHeight: '1.6' }}>
+                <p style={{ marginBottom: '15px' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <input type="checkbox" defaultChecked style={{ transform: 'scale(1.2)' }} />
+                    <span>Enable Email Notifications</span>
+                  </label>
+                </p>
+                <p style={{ marginBottom: '15px' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <input type="checkbox" defaultChecked style={{ transform: 'scale(1.2)' }} />
+                    <span>Auto Backup Menu Data</span>
+                  </label>
+                </p>
+                <p>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <input type="checkbox" defaultChecked style={{ transform: 'scale(1.2)' }} />
+                    <span>Maintenance Mode</span>
+                  </label>
+                </p>
+              </div>
             </div>
           </div>
         )}

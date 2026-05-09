@@ -6,6 +6,7 @@ export default function Navbar({ cartCount, onCartClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logoTapCount, setLogoTapCount] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const navRef = useRef(null);
@@ -45,6 +46,30 @@ export default function Navbar({ cartCount, onCartClick }) {
     }
   };
 
+  const handleLogoClick = () => {
+    setLogoTapCount(prev => {
+      const newCount = prev + 1;
+      
+      // Reset counter after 2 seconds of inactivity
+      setTimeout(() => {
+        setLogoTapCount(0);
+      }, 2000);
+      
+      // Navigate to admin after 5 taps
+      if (newCount === 5) {
+        navigate('/admin');
+        setLogoTapCount(0);
+        return 0;
+      }
+      
+      return newCount;
+    });
+    
+    // Normal logo functionality
+    if (location.pathname !== '/') navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const categories = [
     { id: 'paratha', label: 'Paratha' },
     { id: 'biryani', label: 'Biryani' },
@@ -72,22 +97,21 @@ export default function Navbar({ cartCount, onCartClick }) {
     }}>
       {/* Logo */}
       <div ref={logoRef}
-        onClick={() => {
-          if (location.pathname !== '/') navigate('/');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
+        onClick={handleLogoClick}
         style={{
           fontFamily: "'Playfair Display',serif", fontSize: scrolled ? 24 : 28,
           fontWeight: 900, color: '#fff', letterSpacing: 1,
           cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 0,
           transition: 'all 0.3s ease',
+          position: 'relative',
         }}
       >
         <span style={{ color: '#fff' }}>CR</span>
         <span style={{ color: '#E8541A' }}>A</span>
         <span style={{ color: '#fff' }}>VEZ</span>
-      </div>
+              </div>
 
+      
       {/* Desktop Navigation */}
       <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         {/* Categories Dropdown */}
@@ -218,30 +242,6 @@ export default function Navbar({ cartCount, onCartClick }) {
         >
           Visit Us
         </button>
-
-        {/* Admin Link */}
-        <Link to="/admin" style={{
-          textDecoration: 'none',
-          color: location.pathname === '/admin' ? '#E8541A' : '#999',
-          fontSize: 10, letterSpacing: 2, textTransform: 'uppercase',
-          cursor: 'pointer', fontFamily: "'DM Sans',sans-serif",
-          padding: '8px 12px', borderRadius: 4,
-          transition: 'all 0.2s ease',
-          border: location.pathname === '/admin' ? '1px solid rgba(232,84,26,0.3)' : '1px solid transparent',
-        }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = '#E8541A';
-            e.currentTarget.style.border = '1px solid rgba(232,84,26,0.3)';
-          }}
-          onMouseLeave={(e) => {
-            if (location.pathname !== '/admin') {
-              e.currentTarget.style.color = '#999';
-              e.currentTarget.style.border = '1px solid transparent';
-            }
-          }}
-        >
-          Admin
-        </Link>
 
         <div style={{ width: '1px', height: 24, background: 'rgba(255,255,255,0.1)', margin: '0 12px' }} />
 
@@ -438,39 +438,7 @@ export default function Navbar({ cartCount, onCartClick }) {
           Visit Us
         </button>
 
-        <Link 
-          to="/admin" 
-          onClick={() => setMobileMenuOpen(false)}
-          className="mobile-menu-item"
-          style={{
-            color: location.pathname === '/admin' ? '#E8541A' : '#fff',
-            fontSize: 18,
-            padding: '15px 20px',
-            margin: '5px 0',
-            background: 'transparent',
-            border: location.pathname === '/admin' ? '1px solid #E8541A' : '1px solid transparent',
-            cursor: 'pointer',
-            fontFamily: "'DM Sans', sans-serif",
-            textAlign: 'center',
-            borderRadius: 4,
-            transition: 'all 0.3s ease',
-            width: '200px',
-            textDecoration: 'none',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = '#E8541A';
-            e.currentTarget.style.color = '#E8541A';
-          }}
-          onMouseLeave={(e) => {
-            if (location.pathname !== '/admin') {
-              e.currentTarget.style.borderColor = 'transparent';
-              e.currentTarget.style.color = '#fff';
-            }
-          }}
-        >
-          Admin
-        </Link>
-      </div>
+              </div>
     )}
     </>
   );
